@@ -67,6 +67,19 @@ class Base(unittest.TestCase):
         self.assertEqual(1, res_json['data']['id'])
 
 
+    def test_user_learn(self):
+
+        """Test get words to learn by user"""
+        token = self.test_request_token()
+        self.headers['Authorization'] = 'Bearer ' + token['token']
+
+        res = self.client().get('/users/learn/', query_string={'id':1}, headers=self.headers)
+        res_json  = json.loads(res)
+
+
+        self.assertEqual(res.status_code, 200)
+        self.assertIsNotNone(res_json)
+         
     def test_get_words(self):
         """Test get all words"""
         
